@@ -471,14 +471,14 @@ try {
           stylesheet: `
             [data-osr-id="2"] {
               position: fixed;
-              left: 5%;
+              right: 5%;
               bottom: 5%;
               border: 1px solid black;
               border-radius: 3px;
               background: #3498db;
               color: #ecf0f1;
               padding: 15px;
-              opacity: .8;
+              opacity: .9;
             }
           `
         });
