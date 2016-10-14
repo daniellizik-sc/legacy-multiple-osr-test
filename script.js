@@ -147,6 +147,11 @@ __sco.statusEval = function() {
       statusFour: true,
       osrPage: true,
       page: 'cart'
+    },
+    {
+      match: /github/i,
+      statusOne: true,
+      page: 'github'
     }
   ];
   for (var i = 0; i < config.length; i++) {
