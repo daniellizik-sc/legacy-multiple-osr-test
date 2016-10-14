@@ -17,7 +17,7 @@
 
 <p>In order to get multiple osrs on the same page simultaneously you have to add multiple instances of the same page config. Osr will yell at you, however, if you don't set up split testing, so set the litebox to 100%. Then you have to manually render the other osrs you want in the script. You also have to change the standard selectors and remove all references to <code>#wrapper-sc</code> and use something else instead. In this sample script the data attribute <code>[data-sc-osr-id]</code> is in place, this will let us bind the correct events to all osrs present.
 
-  <script src="dl-test.js"></script>
+  <script src="script.js"></script>
 
   <script>
     (() => {
