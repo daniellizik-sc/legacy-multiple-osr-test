@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title></title>
+  <style>
+  body { 
+    height: 9000px; 
+  }
+  code {
+    background: #ecf0f1;
+  }
+  </style>
+</head>
+<body>
+
+<h1>multiple osr test</h1>
+
+<p>In order to get multiple osrs on the same page simultaneously you have to add multiple instances of the same page config. Osr will yell at you, however, if you don't set up split testing, so set the litebox to 100%. Then you have to manually render the other osrs you want in the script. You also have to change the standard selectors and remove all references to <code>#wrapper-sc</code> and use something else instead. In this sample script the data attribute <code>[data-sc-osr-id]</code> is in place, this will let us bind the correct events to all osrs present.
+
+  <script src="dl-test.js"></script>
+
+  <script>
+    (() => {
+      var id = setInterval(() => {
+        if (__sco) {
+          if (__sco.tickets) {
+            if (!__scd.s) {
+              var ticket = __sco.tickets.pop();
+              if (typeof ticket === 'function')
+                ticket();
+            }
+            else {
+              clearInterval(id);
+              // setTimeout(() => location.assign(location.href), 3000)
+            }
+          }
+        }
+      }, 200)
+    })()
+  </script>
+
+</body>
+</html>
