@@ -4,10 +4,18 @@
   <title></title>
   <style>
   body { 
-    height: 9000px; 
+    font-family: 'Helvetica Neue', sans-serif;
+    height: 9000px;
   }
-  code {
+  pre, code {
     background: #ecf0f1;
+  }
+  li {
+    list-style-type: none;
+    margin: 10px;
+  }
+  li.list {
+    list-style-type: disc;
   }
   </style>
 </head>
@@ -15,7 +23,53 @@
 
 <h1>multiple osr test</h1>
 
-<p>In order to get multiple osrs on the same page simultaneously you have to add multiple instances of the same page config. Osr will yell at you, however, if you don't set up split testing, so set the litebox to 100%. Then you have to manually render the other osrs you want in the script. You also have to change the standard selectors and remove all references to <code>#wrapper-sc</code> and use something else instead. In this sample script the data attribute <code>[data-sc-osr-id]</code> is in place, this will let us bind the correct events to all osrs present.
+<h4>configuration steps</h4>
+<ul>
+  <li class="list">Add multiple instances of your page config.</li>
+  <li><img src="split-test.png"></img></li>
+  <li class="list">Set split testing, set one instance of 100%. Hacky, but it's probably the "cleanest" way to do this.</li>
+  <li class="list">Override standard OSR selectors in the script. This will let you render multiple osrs on the page with their own scoped css.</li>
+  <li><pre><code> /* usually this selector would be #wrapper-sc but we can't use ids with multiple osrs */
+
+[data-sc-osr-id="sticky-trends"] {
+  position: fixed;
+  left: 5%;
+  bottom: 5%;
+  border: 1px solid black;
+  border-radius: 3px;
+  background: #3498db;
+  color: #ecf0f1;
+  padding: 15px;
+  opacity: .8;
+}</code></pre></li>
+  <li><pre><code>&lt;div data-osr-id=&quot;sticky-trends&quot;&gt;
+  &lt;h1&gt;sticky osr trends are 10&lt;/h1&gt;
+  &lt;div data-trends-show-sc=&quot;2&quot;&gt;&lt;/div&gt;
+&lt;/div&gt;</code></pre></li>
+  <li><pre><code>{
+  "liteboxContainer": "[data-osr-id]",
+  "notificationContainer": "[data-osr-id] .notification-sc",
+  "emailContainer": "[data-osr-id] .emailContainer-sc",
+  "emailCaptureField": "[data-osr-id] .emb-sc",
+  "productContainer": null,
+  "productTemplate": null,
+  "trendTemplate": "[data-trends-hide-sc]",
+  "trendContainer": "[data-osr-id] [data-trends-show-sc]",
+  "emailBasketConfirmationTemplate": "[data-osr-id] .embConfirmation",
+  "closeButton": "[data-osr-id] .close-sc",
+  "continueButton": "[data-osr-id] .cta-sc",
+  "saveButton": "[data-osr-id] .send-sc",
+  "message": null,
+  "osrOverlay": "div.osr-overlay",
+  "emailOptIn": "[data-osr-id] .optin-sc",
+  "subscriptionButton": "[data-osr-id] .subscription-click-sc",
+  "subscriptionName": "[data-osr-id] .subscription-name-sc",
+  "subscriptionSurname": "[data-osr-id] .subscription-surname-sc",
+  "subscriptionEmail": "[data-osr-id] .subscription-email-sc",
+  "subscriptionSalutation": "[data-osr-id] .subscription-salutation-sc",
+  "subscriptionTelephone": "[data-osr-id] .subscription-telephone-sc"
+}</code></pre></li>
+</ul>
 
   <script src="script.js"></script>
 
